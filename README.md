@@ -2,6 +2,20 @@
 
 Static page caching for Action Pack (removed from core in Rails 4.0).
 
+## LTS version
+
+This is a fork of Rails' official [actionpack-page_caching gem](https://github.com/rails/actionpack-page_caching), compatible with Rails 4.2 (LTS), with backported security fixes for:
+
+- CVE-2020-8159
+
+
+To use it, you need to add it to the Gemfile like this:
+
+```
+gem 'actionpack-page_caching', git: 'https://github.com/rails-lts/actionpack-page_caching', branch: 'lts-4'
+```
+
+
 ## Introduction
 
 Page caching is an approach to caching in which response bodies are stored in
