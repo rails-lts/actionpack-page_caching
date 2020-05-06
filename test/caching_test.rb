@@ -183,18 +183,18 @@ class PageCachingTest < ActionController::TestCase
       get "/page_caching_test/ok/:id", to: "page_caching_test#ok"
     end
 
-    project_root = File.expand_path("../../", __FILE__)
+    test_root = File.expand_path("..", __FILE__)
 
 
     # Make a path that escapes the cache directory
-    get_to_root = "../../../"
+    get_to_root = "../../../../"
 
     # Make sure this relative path points at the project root
-    assert_equal project_root, File.expand_path(File.join(FILE_STORE_PATH, get_to_root))
+    assert_equal test_root, File.expand_path(File.join(FILE_STORE_PATH, 'page_caching_test', 'ok', get_to_root))
 
-    get :ok, params: { id: "#{get_to_root}../pwnd" }
+    get :ok, id: "#{get_to_root}pwnd"
 
-    assert_predicate Find.find(File.join(project_root, "test")).grep(/pwnd/), :empty?
+    assert_predicate Find.find(File.join(test_root)).grep(/pwnd/), :empty?
   end
 
   def test_page_caching_resources_saves_to_correct_path_with_extension_even_if_default_route
